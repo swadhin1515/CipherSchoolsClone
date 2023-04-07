@@ -7,8 +7,11 @@ import { Main } from "./components/Main";
 import { Context } from "./Context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useCookies } from "react-cookie";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 function App() {
 	// const { isAuthenticated, isLoading, user, loginWithRedirect } = useAuth0();
+	console.log(BASE_URL);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [firstName, setFirstName] = useState("");
@@ -76,7 +79,7 @@ function App() {
 		// development
 		// return await fetch(`http://localhost:5173/api/${url}`, requestOptions)
 		// production
-		return await fetch(`/api/${url}`, requestOptions)
+		return await fetch(`${BASE_URL}/api/${url}`, requestOptions)
 			.then(async (response) => {
 				if (response.status !== 200) {
 					const data = await response.json();
