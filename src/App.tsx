@@ -1,185 +1,64 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useCookies } from "react-cookie";
-import React from "react";
-import { VscDebugRestart } from "react-icons/vsc";
+import React, { useEffect, useState } from "react";
+import { Navbar } from "./components/Navbar";
+import { Banner } from "./components/Banner";
 import "./App.css";
-import { getWords } from "./words";
-
+import { Sidebar } from "./components/Sidebar";
+import { Main } from "./components/Main";
+import { Context } from "./Context";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useCookies } from "react-cookie";
 function App() {
-	const NO_OF_WORDS = 35;
-	const [tab, setTab] = useState("word");
-	const [wordloader, setWordloader] = useState(true);
-	var textArray: string[] = useMemo(
-		() => getWords(NO_OF_WORDS, tab),
-		[wordloader, tab]
-	);
-	const [textonScreen, setTextonScreen] = useState<String[]>([]);
+	// const { isAuthenticated, isLoading, user, loginWithRedirect } = useAuth0();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [signin, setSignin] = useState(true);
+	const [cookies, setCookies, removeCookies] = useCookies();
+	const [token, setToken] = useState(cookies["token"] || null);
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [currentUser, setCurrentUser] = useState(cookies["user"] || null);
 	useEffect(() => {
-		setTextonScreen(textArray);
+		if (token && token !== undefined) setLoggedIn(true);
 	}, []);
-	function reset() {
-		setWordloader((prev) => !prev);
-		setCorrectLetters([]);
-		setCurrentLetterIndex(0);
-		setTextonScreen(textArray);
-		stopTimer();
-		updateScore(Math.round((correctLetters.length / 5) * (60 / time)));
-		setTime(1);
-		// setScore(0);
-	}
-
-	const [currentLetterIndex, setCurrentLetterIndex] = useState(0);
-	const [correctLetters, setCorrectLetters] = useState<Number[]>([]);
-	const [intervalId, setIntervalId] = useState(null);
-	const [started, setStarted] = useState(false);
-	const [time, setTime] = useState(1);
-	const [loginModal, setLoginModal] = useState(false);
-	const [registerModal, setRegisterModal] = useState(false);
-	const nameRef = useRef<HTMLInputElement>(null);
-	const emailRef = useRef<HTMLInputElement>(null);
-	const passwordRef = useRef<HTMLInputElement>(null);
-	const [cookies, setCookies, removeCookie] = useCookies();
-	const [token, setToken] = useState(cookies["TOKEN"] || null);
-	const [user, setUser] = useState(cookies["USER"] || null);
-	const [loggedIn, setLoggedIn] = useState(token ? true : false);
-	const [error, setError] = useState("");
-	const [highScore, setHighScore] = useState(cookies["HIGH_SCORE"] || 0);
-	const startTimer = () => {
-		if (!started) {
-			const id = setInterval(() => {
-				setTime((time) => time + 1);
-			}, 1000);
-
-			setIntervalId(id as any);
-			setStarted(true);
-		}
-	};
-	const stopTimer = () => {
-		clearInterval(intervalId as any);
-		setIntervalId(null);
-		setStarted(false);
-		// updateScore(Math.round((correctLetters.length / 5) * (60 / time)));
-	};
-	useEffect(() => {
-		if (time >= 61) stopTimer();
-	}, [time]);
-	//used to autofocus on the text string
-	const inputRef = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		inputRef.current?.focus();
-		if (token) {
-			setLoggedIn(true);
-		}
-	}, [tab, started]);
-	// if (currentLetterIndex > textArray.length - 2 && started) {
-	// 	stopTimer();
-	// }
-	//controls the input key press
-	function controller(e: React.KeyboardEvent) {
-		startTimer();
-		e.preventDefault();
-		if (e.key.length === 1) {
-			if (e.key === textArray[currentLetterIndex]) {
-				setCorrectLetters((prev) => {
-					return [...prev, currentLetterIndex];
-				});
-			}
-			setCurrentLetterIndex((prev) => prev + 1);
-		} else if (e.key === "Backspace") {
-			setCorrectLetters((prev) => {
-				return [...prev].filter(
-					(letter) => letter !== currentLetterIndex - 1
-				);
-			});
-			if (currentLetterIndex !== 0)
-				setCurrentLetterIndex((prev) => prev - 1);
-		}
-		if (currentLetterIndex > textArray.length - 2 && started) {
-			stopTimer();
-		}
-		return true;
-	}
-	//return color for the characters
-	function getColor(index: number) {
-		if (correctLetters.includes(index)) return "white";
-		if (index >= currentLetterIndex) return "gray";
-		else return "yellow";
-	}
-
-	//handles the type of text
-	function handleTabChange(e: React.MouseEvent) {
-		const { target } = e;
-		reset();
-		// to access target in context of HTML use HTMLButtonElement
-		if ((target as HTMLButtonElement).id !== tab)
-			setTab((prev) => (target as HTMLButtonElement).id);
-	}
-	function handleModal(e: React.MouseEvent) {
-		const { target } = e;
-		if ((target as HTMLButtonElement).id === "login-btn") {
-			setLoginModal(true);
-			setRegisterModal(false);
-		}
-		if ((target as HTMLButtonElement).id === "register-btn") {
-			setLoginModal(false);
-			setRegisterModal(true);
-		}
-		if ((target as HTMLButtonElement).id === "modal-close") {
-			setError("");
-			setRegisterModal(false);
-			setLoginModal(false);
-		}
-	}
-	async function login(event) {
-		if (event != null) event.preventDefault();
-		const url = "login";
+	async function handleSignup() {
 		try {
 			const formData = {
-				email: emailRef.current?.value,
-				password: passwordRef.current?.value,
-				score: Math.round((correctLetters.length / 5) * (60 / time)),
+				name: firstName + " " + lastName,
+				email: email,
+				password: password,
 			};
 			const responseData = await performFetch({
-				url,
+				url: "register",
 				formData,
-			})
+			});
+			if (responseData) {
+				await handleSignin();
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	async function handleSignin() {
+		const formData = {
+			email: email,
+			password: password,
+		};
+		try {
+			const response = await performFetch({ url: "login", formData })
 				.then((response) => {
 					return response;
 				})
 				.catch((error) => {
 					console.error(error);
 				});
-			if (responseData) {
-				setHighScore(responseData.score);
-				setRegisterModal(false);
-				setLoginModal(false);
-				setToken(responseData.token);
-				setUser(responseData.user);
-				setCookies("TOKEN", responseData.token);
-				setCookies("USER", responseData.user);
-				setCookies("HIGH_SCORE", responseData.score);
+			if (response) {
+				setToken(response.token);
+				setCookies("token", response.token);
 				setLoggedIn(true);
-				setError("");
 			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
-	async function register(event) {
-		event.preventDefault();
-		const url = "register";
-		try {
-			const formData = {
-				name: nameRef.current?.value,
-				email: emailRef.current?.value,
-				password: passwordRef.current?.value,
-			};
-			const responseData = await performFetch({ url, formData });
-			if (responseData) {
-				await login(null);
-			}
-		} catch (error) {
-			console.error(error);
+		} catch (err) {
+			console.log(err);
 		}
 	}
 	async function performFetch({ url, formData }) {
@@ -195,240 +74,128 @@ function App() {
 		};
 
 		// development
-		// return await fetch(`http://localhost:5174/api/${url}`, requestOptions)
-		// production
-		return await fetch(`/api/${url}`, requestOptions)
+		return await fetch(`http://localhost:5174/api/${url}`, requestOptions)
+			// production
+			// return await fetch(`/api/${url}`, requestOptions)
 			.then(async (response) => {
 				if (response.status !== 200) {
 					const data = await response.json();
-					setError(data.message);
 					return null;
 				}
-				return response.json();
+				const responseData = await response.json();
+				setCurrentUser(responseData.user);
+				setCookies("user", responseData.user);
+				return responseData;
 			})
 			.catch((error) => {
 				return error;
 			});
 	}
 	function logout() {
-		removeCookie("TOKEN");
-		removeCookie("USER");
-		removeCookie("HIGH_SCORE");
+		removeCookies("token");
+		removeCookies("user");
 		setToken(null);
-		setUser(null);
+		setCurrentUser(null);
 		setLoggedIn(false);
-		// setScore(0);
-		setHighScore(0);
+		setEmail("");
+		setPassword("");
+		setFirstName("");
+		setLastName("");
+		setSignin(true);
 	}
-	async function updateScore(newScore: number) {
-		if (newScore > highScore) {
-			// setScore(newScore);
-			if (!user) return;
-			const url = "update";
-			try {
-				const formData = {
-					name: user,
-					score: newScore,
-				};
-				const result = await performFetch({ url, formData });
-				if (result) {
-					setCookies("HIGH_SCORE", result.score);
-					setHighScore(result.score);
-				}
-			} catch (err) {
-				console.error(err);
-			}
-		}
-	}
-	return (
-		<main className="AppContainer">
-			<div className="app-box">
-				<nav>
-					<ul>
-						<li className="logo">tYPO</li>
-						{loggedIn ? (
-							<li>
-								<span className="username">{user}</span>
-								<span className="score">{highScore}</span>
-								<button
-									className="btn logout-btn"
-									onClick={logout}>
-									Logout
-								</button>
-							</li>
-						) : (
-							<li>
-								<button
-									id="login-btn"
-									className="login-btn"
-									onClick={(e) => handleModal(e)}>
-									Login
-								</button>
-								<button
-									id="register-btn"
-									className="register-btn"
-									onClick={(e) => handleModal(e)}>
-									Register
-								</button>
-							</li>
-						)}
-					</ul>
-				</nav>
-
-				<main>
-					<div className="tab-container">
-						<div
-							className={
-								tab === "word" ? "active-tab tab" : "tab"
-							}
-							id="word"
-							onClick={(e) => handleTabChange(e)} // handletabchange returns void so have to put it inside an arrow function
-						>
-							Word
-						</div>
-						<div
-							className={
-								tab === "sentence" ? "active-tab tab" : "tab"
-							}
-							id="sentence"
-							onClick={(e) => handleTabChange(e)}>
-							Sentence
-						</div>
-						<div className="tab" onClick={reset}>
-							<VscDebugRestart />
-						</div>
-					</div>
-					{time >= 61 || currentLetterIndex > textArray.length ? (
-						<section className="App">
-							<div className="wpm">
-								WPM :{" "}
-								{Math.round(
-									(correctLetters.length / 5) * (60 / time)
-								)}
-							</div>
-							<div className="correct">
-								<span>{correctLetters.length}</span>/
-								<span style={{ color: "yellow" }}>
-									{currentLetterIndex - correctLetters.length}
-								</span>
-							</div>
-							<div className="accuracy">
-								Accuracy :{" "}
-								{(
-									(correctLetters.length /
-										currentLetterIndex) *
-									100
-								).toFixed(3)}
-								%
-							</div>
-							<div className="tab" onClick={reset}>
-								<VscDebugRestart />
-							</div>
-							{loggedIn ? null : (
-								<div className="save-score">
-									<span
-										className="login-sm"
-										id="login-btn"
-										onClick={(e) => {
-											handleModal(e);
-										}}>
-										Login
-									</span>{" "}
-									to save your score
-								</div>
-							)}
-						</section>
-					) : (
-						<section
-							onKeyDown={controller}
-							tabIndex={1}
-							ref={inputRef}
-							className="App">
-							<div className="wpm">
-								{Math.round(
-									(correctLetters.length / 5) * (60 / time)
-								)}{" "}
-								, {time - 1}
-							</div>
-							{textonScreen &&
-								textArray.map((text, index: number) => {
-									return (
-										<span
-											style={{ color: getColor(index) }}
-											className={
-												currentLetterIndex === index
-													? "active" + " letter"
-													: "letter"
-											}
-											key={index}>
-											{text}
-										</span>
-									);
-								})}
-						</section>
+	if (loggedIn)
+		return (
+			<Context.Provider value={{ currentUser, performFetch }}>
+				<Navbar />
+				<Sidebar handleLogout={logout} />
+				<Banner />
+				<Main />
+			</Context.Provider>
+		);
+	else {
+		return (
+			<div className="flex flex-col h-screen justify-center items-center bg-slate-800 bg-opacity-10">
+				<main className="text-center p-5 px-20 bg-white rounded-2xl shadow-md xl:w-[50rem]">
+					<header className="text-2xl text-left">Signin</header>
+					<h1 className="flex gap-4 text-xl font-medium items-center mt-4 justify-center">
+						<img
+							src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
+							alt=""
+							className="w-10"
+						/>
+						<span>CipherSchools</span>
+					</h1>
+					<h2 className="text-lg mt-4">
+						{signin ? "Hey, Welcome!" : "Create New Account"}
+					</h2>
+					<p className="text-base mb-4">
+						{signin
+							? "Please provide your email and password to signin"
+							: "Please provide your valid information to signup"}
+					</p>
+					{!signin && (
+						<>
+							<input
+								type="text"
+								placeholder="First Name"
+								value={firstName}
+								onChange={(e) =>
+									setFirstName(e.currentTarget.value)
+								}
+								className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+							/>
+							<input
+								type="text"
+								placeholder="Last Name"
+								value={lastName}
+								onChange={(e) =>
+									setLastName(e.currentTarget.value)
+								}
+								className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+							/>
+						</>
 					)}
+					<input
+						type="email"
+						placeholder="Email ID"
+						value={email}
+						onChange={(e) => setEmail(e.currentTarget.value)}
+						className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+					/>
+					<input
+						type="password"
+						placeholder="Password"
+						value={password}
+						onChange={(e) => setPassword(e.currentTarget.value)}
+						className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:border-slate-200"
+					/>
+					<button
+						onClick={signin ? handleSignin : handleSignup}
+						className="bg-orange-400 text-white py-4 px-20 rounded-2xl w-full text-base hover:bg-orange-300 duration-200 transition mt-14">
+						{signin ? "Signin" : "Create Account"}
+					</button>
+					<p className="text-base mt-4">
+						{signin
+							? "Don't have an account ? "
+							: "Already have an account ? "}
+						<button
+							className="text-orange-400"
+							onClick={() => setSignin((prev) => !prev)}>
+							{signin ? "Get Started" : "Signin Now"}
+						</button>
+					</p>
+					<div className="text-base relative font-bold border-t-2 mt-8">
+						<span className="bg-white relative -top-4 p-4">OR</span>
+					</div>
+					<button
+						// onClick={() => loginWithRedirect()}
+						className="bg-white text-slate-800 py-4 px-20 rounded-2xl w-full text-base hover:bg-slate-100 duration-200 transition border-2 border-slate-200 font-medium">
+						Login with Socials
+					</button>
 				</main>
-				{(loginModal || registerModal) && (
-					<section className="login-modal-container">
-						<div className="login-modal">
-							<button
-								id="modal-close"
-								onClick={(e) => handleModal(e)}>
-								X
-							</button>
-							<h3>{loginModal ? "Login" : "Register"}</h3>
-							<form
-								id={loginModal ? "login" : "register"}
-								onSubmit={loginModal ? login : register}>
-								{registerModal && (
-									<input
-										type="text"
-										placeholder="Username"
-										ref={nameRef}
-									/>
-								)}
-								<input
-									type="email"
-									placeholder="Email"
-									ref={emailRef}
-								/>
-								<input
-									type="password"
-									placeholder="Password"
-									ref={passwordRef}
-								/>
-								{error && <div className="error">{error}</div>}
-								<button type="submit">
-									{loginModal ? "Login" : "Register"}
-								</button>
-								{loginModal ? (
-									<p className="save-score">
-										Need an Account ?{" "}
-										<span
-											className="login-sm"
-											id="register-btn"
-											onClick={(e) => handleModal(e)}>
-											Register
-										</span>
-									</p>
-								) : (
-									<p className="save-score">
-										Already have an Account ?{" "}
-										<span
-											className="login-sm"
-											id="login-btn"
-											onClick={(e) => handleModal(e)}>
-											Login
-										</span>
-									</p>
-								)}
-							</form>
-						</div>
-					</section>
-				)}
 			</div>
-		</main>
-	);
+		);
+	}
 }
 
 export default App;

@@ -7,7 +7,7 @@ loginRouter.get("/", function (req, res) {
 	res.status(200).send("Hello from login server");
 });
 loginRouter.post("/", async (req, res) => {
-	const userScore = await prisma.user
+	const user = await prisma.user
 		.findUnique({
 			where: {
 				email: req.body.email,
@@ -36,9 +36,7 @@ loginRouter.post("/", async (req, res) => {
 					//   return success res
 					res.status(200).send({
 						message: "Login Successful",
-						email: user!.email,
-						user: user!.name,
-						score: user!.score,
+						user: user,
 						token,
 					});
 				})
@@ -48,7 +46,7 @@ loginRouter.post("/", async (req, res) => {
 						err,
 					});
 				});
-			return user!.score;
+			return user;
 		})
 		.catch((err) => {
 			res.status(404).send({
@@ -56,21 +54,5 @@ loginRouter.post("/", async (req, res) => {
 				err: err,
 			});
 		});
-	if (userScore < req.body.score) {
-		prisma.user
-			.update({
-				where: {
-					email: req.body.email,
-				},
-				data: {
-					score: req.body.score,
-				},
-			})
-			.then((user) => {
-				return user;
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-	}
+	return user;
 });

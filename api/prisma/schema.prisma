@@ -6,14 +6,29 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id       String @id @default(cuid())
-  email    String @unique
-  name     String @unique
-  password String @unique
-  score    Int    @default(0)
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  email             String   @unique
+  name              String   @unique
+  password          String   @unique
+  picture           String
+  interests         String[]
+  linkedin          String?
+  instagram         String?
+  github            String?
+  facebook          String?
+  website           String?
+  number            String?
+  twitter           String?
+  about             String?
+  highest_education String?
+  current_work      String?
+  followedBy        User[]   @relation("UserFollows", fields: [followedByIDs], references: [id])
+  followedByIDs     String[] @db.ObjectId
+  following         User[]   @relation("UserFollows", fields: [followingIDs], references: [id])
+  followingIDs      String[] @db.ObjectId
 }

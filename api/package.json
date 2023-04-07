@@ -5,11 +5,11 @@
 	"main": "../api/app.ts",
 	"scripts": {
 		"dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\"",
-		"build": "npm install && tsc",
+		"build": "npm install && tsc && npm start",
 		"start": "node dist/app.js"
 	},
 	"dependencies": {
-		"@prisma/client": "^4.10.1",
+		"@prisma/client": "^4.12.0",
 		"bcrypt": "^5.1.0",
 		"cookie-parser": "~1.4.4",
 		"cors": "^2.8.5",
