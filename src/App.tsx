@@ -11,7 +11,6 @@ import { useCookies } from "react-cookie";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 function App() {
 	// const { isAuthenticated, isLoading, user, loginWithRedirect } = useAuth0();
-	console.log(BASE_URL);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [firstName, setFirstName] = useState("");
@@ -77,7 +76,7 @@ function App() {
 		};
 
 		// development
-		// return await fetch(`http://localhost:5173/api/${url}`, requestOptions)
+		// return await fetch(`http://localhost:3000/api/${url}`, requestOptions)
 		// production
 		return await fetch(`${BASE_URL}/api/${url}`, requestOptions)
 			.then(async (response) => {
