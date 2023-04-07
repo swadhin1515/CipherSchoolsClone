@@ -8,7 +8,7 @@ import { Auth } from "./routes/auth";
 
 export const prisma = new PrismaClient();
 export const app = express();
-const port = process.env.PORT || 5174;
+const port = process.env.PORT || 5173;
 app.use(express.static(path.join(__dirname, "../../dist")));
 console.log(path.join(__dirname, "../../"));
 app.get("/", (req, res) => {
