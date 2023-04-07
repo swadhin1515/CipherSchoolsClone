@@ -57,7 +57,7 @@ function App() {
 				});
 			if (response) {
 				setToken(response.token);
-				setCookies("token", response.token);
+				if (response.token) setCookies("token", response.token);
 				setLoggedIn(true);
 			}
 		} catch (err) {
