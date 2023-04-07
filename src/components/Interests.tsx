@@ -31,9 +31,11 @@ export function Interests() {
 					</button>
 				</header>
 				<div className="flex flex-wrap gap-4">
-					{selectedInterests.map((interest) => {
+					{selectedInterests.map((interest: string) => {
 						return (
-							<span className="rounded-lg bg-orange-100 bg-opacity-70 text-orange-400 p-2 px-4 text-xs">
+							<span
+								key={interest}
+								className="rounded-lg bg-orange-100 bg-opacity-70 text-orange-400 p-2 px-4 text-xs">
 								{interest}
 							</span>
 						);

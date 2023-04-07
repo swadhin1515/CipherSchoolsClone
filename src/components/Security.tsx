@@ -21,8 +21,8 @@ export function Security() {
 					<h2 className="text-base font-medium mb-2 text-gray-600">
 						Password
 					</h2>
-					<div className="p-3 text-base text-gray-600 rounded-lg items-center bg-white flex justify-between">
-						<span className="text-bold text-2xl -translate-y-3">
+					<div className="p-2 px-4 text-base text-gray-600 rounded-lg items-center bg-white flex justify-between">
+						<span className="text-bold text-2xl -translate-y-2">
 							....................
 						</span>
 					</div>

@@ -14,7 +14,7 @@ export function Navbar() {
 	const [browseModalVisible, setBrowseModalVisible] = useState(false);
 	const { currentUser } = useContext(Context);
 	return (
-		<nav className="border-b-2 lg:px-10 px-5 py-3 sticky top-0 w-full z-20 bg-white">
+		<nav className="border-b-2 py-2 lg:px-10 px-5 sticky top-0 w-full z-20 bg-white">
 			<ul className="flex justify-between">
 				<li className="flex gap-6">
 					<div className="logo flex items-center gap-2 cursor-pointer col-span-2 lg:ml-14">
@@ -53,42 +53,42 @@ export function Navbar() {
 								}>
 								<a
 									href="#"
-									className="hover:bg-slate-100 py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100 py-1 px-6 transition duration-200 text-sm">
 									App Development
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Web Development
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Game Development
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Data Structures
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Programming
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Machine Learning
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Data Science
 								</a>
 								<a
 									href="#"
-									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-xs">
+									className="hover:bg-slate-100  py-1 px-6 transition duration-200 text-sm">
 									Others
 								</a>
 							</div>
@@ -96,23 +96,23 @@ export function Navbar() {
 					</div>
 				</li>
 				<li className="flex gap-10 items-center">
-					<div className="border-2 p-2 rounded-2xl bg-gray-100 xl:flex hidden items-center px-6">
+					<div className="border-2 rounded-2xl bg-gray-100 xl:flex hidden items-center px-6">
 						<FiSearch className="text-base text-gray-500 cursor-pointer hidden lg:inline-block " />
 						<input
 							type="text"
 							placeholder="Search and learn"
-							className="2xl:w-96 xl:w-60 border-none  bg-gray-100 focus:ring-0"
+							className="lg:w-96  border-none  bg-gray-100 focus:ring-0"
 						/>
 						<button>
 							<RiEqualizerLine className="text-lg" />
 						</button>
 					</div>
-					<AiOutlineBell className="text-lg cursor-pointer lg:block hidden" />
+					<AiOutlineBell className="text-2xl cursor-pointer lg:block hidden" />
 					<button className="lg:inline hidden">
 						<img
 							src={currentUser.picture}
 							alt="profile-photo"
-							className="rounded-full h-10 w-10"
+							className="rounded-full h-8 w-8"
 						/>
 					</button>
 					<button className="lg:flex items-center justify-center gap-2 hidden">

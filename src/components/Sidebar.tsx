@@ -17,7 +17,7 @@ export function Sidebar(props) {
 		<aside className="relative lg:block hidden">
 			<button
 				onClick={() => setShowSidebar((prev) => !prev)}
-				className=" mx-8 lg:my-6 my-7 z-20 fixed top-0 block">
+				className=" mx-8 my-5 z-20 fixed top-0 block">
 				<HiMenuAlt2 className="lg:text-2xl text-xl " />
 			</button>
 			<div
@@ -28,7 +28,7 @@ export function Sidebar(props) {
 					<li
 						className={`${
 							showSidebar ? "gap-6 pr-10" : "flex-col px-4"
-						} +  w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-200 cursor-pointer`}>
+						} + p-2  w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-200 cursor-pointer`}>
 						<AiFillHome className="text-xl" />
 						<span className={`${!showSidebar && "text-xs"}`}>
 							Home
@@ -127,11 +127,12 @@ export function Sidebar(props) {
 						</span>
 					</li>
 				</ul>
+				<hr />
 				<button
 					onClick={handleLogout}
 					className={`${
 						showSidebar ? "gap-6 pr-10" : "flex-col"
-					} + p-2  w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-150 cursor-pointer border-t-2`}>
+					} + p-2  w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-150 cursor-pointer`}>
 					<RiLogoutCircleRLine className="text-xl" />
 					<span className={`${!showSidebar && "text-sm"}`}>
 						Logout

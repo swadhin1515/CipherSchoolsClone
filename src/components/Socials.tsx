@@ -55,7 +55,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Linkedin
 					</h2>
-					<div className="bg-white p-3 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<BsLinkedin className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
@@ -74,7 +74,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Github
 					</h2>
-					<div className="bg-white p-3 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<BsGithub className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
@@ -93,7 +93,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Facebook
 					</h2>
-					<div className="bg-white p-4 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<BsFacebook className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
@@ -112,7 +112,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Twitter
 					</h2>
-					<div className="bg-white p-4 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<BsTwitter className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
@@ -131,7 +131,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Instagram
 					</h2>
-					<div className="bg-white p-4 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<FaInstagramSquare className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
@@ -152,7 +152,7 @@ export function Socials() {
 					<h2 className="text-base font-medium text-gray-600 mb-2">
 						Website
 					</h2>
-					<div className="bg-white p-4 rounded-lg flex gap-4 items-center relative">
+					<div className="bg-white p-2 rounded-lg flex gap-4 items-center relative">
 						<TbWorld className="rounded-full text-gray-400 placeholder:text-gray-400 text-2xl" />
 						<input
 							type="text"
