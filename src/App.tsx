@@ -74,9 +74,9 @@ function App() {
 		};
 
 		// development
-		return await fetch(`http://localhost:5174/api/${url}`, requestOptions)
-			// production
-			// return await fetch(`/api/${url}`, requestOptions)
+		// return await fetch(`http://localhost:5173/api/${url}`, requestOptions)
+		// production
+		return await fetch(`/api/${url}`, requestOptions)
 			.then(async (response) => {
 				if (response.status !== 200) {
 					const data = await response.json();
