@@ -16,7 +16,7 @@ export function Navbar() {
 	return (
 		<nav className="border-b-2 py-2 lg:px-10 px-2 sticky top-0 w-full z-20 bg-white">
 			<ul className="flex justify-between">
-				<li className="flex gap-1 sm:gap-2 sm:justify-between w-full">
+				<li className="flex sm:gap-2 sm:justify-between w-full">
 					<div className="logo flex items-center gap-2 cursor-pointer col-span-2 lg:ml-14">
 						<img
 							src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
@@ -27,7 +27,7 @@ export function Navbar() {
 							CipherSchools
 						</h1>
 					</div>
-					<div className="flex items-center">
+					<div className="flex items-center ml-2">
 						<div className="relative">
 							<button
 								className="flex items-center gap-1"
@@ -95,7 +95,7 @@ export function Navbar() {
 						</div>
 					</div>
 				</li>
-				<li className="flex lg:gap-10 gap-4 items-center text-">
+				<li className="flex lg:gap-10 gap-4 items-center text-xl">
 					<div className="border-2 rounded-2xl bg-gray-100 xl:flex hidden items-center px-6">
 						<FiSearch className="text-base text-gray-500 cursor-pointer hidden lg:inline-block " />
 						<input
@@ -107,12 +107,12 @@ export function Navbar() {
 							<RiEqualizerLine className="text-lg" />
 						</button>
 					</div>
-					<AiOutlineBell className="text-2xl cursor-pointer lg:block hidden" />
-					<button className="lg:inline hidden">
+					<AiOutlineBell className=" cursor-pointer lg:inline hidden sm:text-4xl" />
+					<button className=" hidden rounded-full lg:flex justify-center w-10 max-h-10">
 						<img
 							src={currentUser.picture}
 							alt="profile-photo"
-							className="rounded-full h-8 w-8"
+							className="rounded-full "
 						/>
 					</button>
 					<button className="lg:flex items-center justify-center gap-2 hidden">

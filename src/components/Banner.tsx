@@ -4,7 +4,7 @@ import { Context } from "../Context";
 import ImageUploading from "react-images-uploading";
 const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 export function Banner() {
-	const { currentUser } = useContext(Context);
+	const { currentUser, setShowFollower } = useContext(Context);
 	const [showModal, setShowModal] = useState(false);
 	return (
 		<section className="bg-banner-pattern  py-3 flex items-center justify-between banner relative border-b-2 ">
@@ -35,8 +35,10 @@ export function Banner() {
 					{currentUser?.email}
 				</span>
 			</div>
-			<button className="z-10 text-sm sm:text-lg font-medium mr-5 flex gap-1">
-				<span>0 </span>
+			<button
+				className="z-10 text-sm sm:text-lg font-medium mr-5 flex gap-1 "
+				onClick={() => setShowFollower(true)}>
+				<span>{currentUser.followedByIDs.length} </span>
 				<span>Followers</span>
 			</button>
 			{showModal && <ProfileEditModal setShowModal={setShowModal} />}
