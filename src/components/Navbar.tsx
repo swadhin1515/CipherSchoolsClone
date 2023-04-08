@@ -14,23 +14,23 @@ export function Navbar() {
 	const [browseModalVisible, setBrowseModalVisible] = useState(false);
 	const { currentUser } = useContext(Context);
 	return (
-		<nav className="border-b-2 py-2 lg:px-10 px-5 sticky top-0 w-full z-20 bg-white">
+		<nav className="border-b-2 py-2 lg:px-10 px-2 sticky top-0 w-full z-20 bg-white">
 			<ul className="flex justify-between">
-				<li className="flex gap-6">
+				<li className="flex gap-1 sm:gap-2 sm:justify-between w-full">
 					<div className="logo flex items-center gap-2 cursor-pointer col-span-2 lg:ml-14">
 						<img
 							src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
-							className="nav-logo h-9 w-9"
+							className="nav-logo h-5 w-5 sm:w-9 sm:h-9"
 							alt="cipherschools-logo"
 						/>
-						<h1 className="text-lg lg:text-xl font-bold font-primary">
+						<h1 className="lg:text-xl font-bold font-primary">
 							CipherSchools
 						</h1>
 					</div>
-					<div className="flex items-center gap-4 ">
+					<div className="flex items-center">
 						<div className="relative">
 							<button
-								className="flex items-center gap-2 ml-10"
+								className="flex items-center gap-1"
 								onClick={() =>
 									setBrowseModalVisible((prev) => !prev)
 								}>

@@ -31,11 +31,11 @@ export function Banner() {
 				<span className="text-lg lg:text-2xl col-span-2 font-bold leading-4">
 					{currentUser?.name}
 				</span>
-				<span className="sm:text-base lg:text-lg col-span-2 leading-9">
+				<span className="text-sm sm:text-base lg:text-lg col-span-2 leading-9">
 					{currentUser?.email}
 				</span>
 			</div>
-			<button className="z-10 md:text-lg font-medium mr-5">
+			<button className="z-10 text-sm sm:text-lg font-medium mr-5 flex gap-1">
 				<span>0 </span>
 				<span>Followers</span>
 			</button>

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { AiFillHome, AiOutlineClockCircle } from "react-icons/ai";
 import { IoCompass, IoLibrary } from "react-icons/io5";
 import { MdDashboard, MdPerson } from "react-icons/md";
@@ -7,7 +7,6 @@ import {
 	RiLogoutCircleRLine,
 	RiUserFollowFill,
 } from "react-icons/ri";
-import { Context } from "../Context";
 
 export function Bottomnav(props) {
 	const [showProfileBar, setShowProfileBar] = useState(false);
@@ -18,7 +17,7 @@ export function Bottomnav(props) {
 		<aside className="flex justify-center fixed bottom-5 w-full lg:hidden">
 			<div className=" bg-white rounded-full w-[90%]">
 				{showProfileBar && (
-					<ul className="absolute bottom-4 pb-14 -z-10 bg-white rounded-2xl shadow-lg w-[90%]">
+					<ul className="absolute bottom-4 pb-16 -z-10 bg-white rounded-2xl shadow-lg w-[90%]">
 						<li className=" p-2 items-center gap-4 px-4 flex text-base hover:bg-orange-100 rounded-md transition duration-200 cursor-pointer">
 							<MdDashboard className="text-xl" />
 							<span className="text-xs">Dashboard</span>
