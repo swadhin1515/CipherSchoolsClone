@@ -24,7 +24,9 @@ function App() {
 	useEffect(() => {
 		if (token && token !== undefined) setLoggedIn(true);
 	}, []);
-	async function handleSignup() {
+	async function handleSignup(e) {
+		if (e !== null) e.preventDefault();
+
 		try {
 			const formData = {
 				name: firstName + " " + lastName,
@@ -36,13 +38,14 @@ function App() {
 				formData,
 			});
 			if (responseData) {
-				await handleSignin();
+				await handleSignin(null);
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	async function handleSignin() {
+	async function handleSignin(e) {
+		if (e !== null) e.preventDefault();
 		const formData = {
 			email: email,
 			password: password,
@@ -119,7 +122,11 @@ function App() {
 	else {
 		return (
 			<div className="flex flex-col h-screen justify-center items-center bg-slate-800 bg-opacity-10 pt-0 px-5">
-				<main className="text-center py-20 lg:py-10 bg-white rounded-2xl shadow-md xl:w-[50rem] px-10">
+				<form
+					onSubmit={(e) =>
+						signin ? handleSignin(e) : handleSignup(e)
+					}
+					className="text-center py-20 lg:py-10 bg-white rounded-2xl shadow-md xl:w-[50rem] px-10">
 					<header className="text-2xl text-left ">Signin</header>
 					<h1 className="flex gap-4 text-xl font-medium items-center mt-4 justify-center">
 						<img
@@ -174,7 +181,7 @@ function App() {
 						className="border-2 border-slate-200 p-3 text-base  text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:border-slate-200"
 					/>
 					<button
-						onClick={signin ? handleSignin : handleSignup}
+						type="submit"
 						className="bg-orange-400 text-white py-4 px-20 rounded-2xl w-full text-base  hover:bg-orange-300 duration-200 transition mt-14">
 						{signin ? "Signin" : "Create Account"}
 					</button>
@@ -188,7 +195,7 @@ function App() {
 							{signin ? "Get Started" : "Signin Now"}
 						</button>
 					</p>
-				</main>
+				</form>
 			</div>
 		);
 	}
