@@ -116,7 +116,7 @@ function App() {
 				<Sidebar handleLogout={logout} />
 				<Banner />
 				<Main />
-				<Bottomnav />
+				<Bottomnav handleLogout={logout} />
 			</Context.Provider>
 		);
 	else {

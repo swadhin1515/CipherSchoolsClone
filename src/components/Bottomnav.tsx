@@ -9,9 +9,11 @@ import {
 } from "react-icons/ri";
 import { Context } from "../Context";
 
-export function Bottomnav() {
+export function Bottomnav(props) {
 	const [showProfileBar, setShowProfileBar] = useState(false);
-	const { handleLogout } = useContext(Context);
+	function handleLogout() {
+		props.handleLogout();
+	}
 	return (
 		<aside className="flex justify-center fixed bottom-5 w-full lg:hidden">
 			<div className=" bg-white rounded-full w-[90%]">
