@@ -62,7 +62,7 @@ export function Followers() {
 								) ? (
 									<button
 										onClick={handleFollow}
-										className="w-full py-2 px-10 text-xs bg-slate-800 rounded-md text-white hover:bg-slate-200 hover:text-slate-800 transition duration-200">
+										className="w-full py-2 px-8 text-xs bg-slate-800 rounded-md text-white hover:bg-slate-200 hover:text-slate-800 transition duration-200">
 										UnFollow
 									</button>
 								) : (

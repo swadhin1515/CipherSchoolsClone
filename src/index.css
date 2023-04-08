@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 html {
-	@apply text-lg sm:text-base;
+	@apply text-lg sm:text-base font-primary;
 }
 
 /* banner gradient */
