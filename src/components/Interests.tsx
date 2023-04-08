@@ -55,6 +55,7 @@ export function Interests() {
 function InterestsAddModal(props: any) {
 	const { currentUser, performFetch } = useContext(Context);
 	async function handleSave() {
+		props.setShowModal(false);
 		try {
 			const formData = {
 				email: currentUser.email,
@@ -63,8 +64,6 @@ function InterestsAddModal(props: any) {
 			await performFetch({ url: "update", formData });
 		} catch (err) {
 			console.error(err);
-		} finally {
-			props.setShowModal(false);
 		}
 	}
 	function handleInterestSelection(e, interest: string) {

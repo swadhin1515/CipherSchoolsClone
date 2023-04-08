@@ -80,7 +80,7 @@ function PasswordChangeModal(props) {
 					className="mt-4 mb-2 font-medium text-base text-slate-600">
 					Current Password
 				</label>
-				<div className="flex bg-slate-100 rounded-lg px-4 py-2 justify-between w-96 lg:w-[40rem]">
+				<div className="flex bg-slate-100 rounded-lg px-4 py-2 justify-between w-80 lg:w-[40rem]">
 					<input
 						type="password"
 						id="current-password"
@@ -94,7 +94,7 @@ function PasswordChangeModal(props) {
 					className="mt-4 mb-2 font-medium text-base text-slate-600">
 					New Password
 				</label>
-				<div className="flex bg-slate-100 rounded-lg px-4 py-2 justify-between">
+				<div className="w-80 lg:w-[40rem] flex bg-slate-100 rounded-lg px-4 py-2 justify-between">
 					<input
 						type="password"
 						id="new-password"
@@ -108,7 +108,7 @@ function PasswordChangeModal(props) {
 					className="mt-4 mb-2 font-medium text-base text-slate-600">
 					Confirm Password
 				</label>
-				<div className="flex bg-slate-100 rounded-lg px-4 py-2 justify-between">
+				<div className="flex bg-slate-100 w-80 lg:w-[40rem] rounded-lg px-4 py-2 justify-between">
 					<input
 						type="password"
 						id="confirm-password"

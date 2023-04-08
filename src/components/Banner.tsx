@@ -2,12 +2,13 @@ import React, { useContext, useRef, useState } from "react";
 import { MdCancel, MdEdit } from "react-icons/md";
 import { Context } from "../Context";
 import ImageUploading from "react-images-uploading";
+const IMGBB_API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
 export function Banner() {
 	const { currentUser } = useContext(Context);
 	const [showModal, setShowModal] = useState(false);
 	return (
-		<section className="bg-banner-pattern px-5 py-3 flex items-center justify-between banner relative border-b-2 lg:ml-24">
-			<div className="grid grid-cols-3 z-10 items-center gap-x-2">
+		<section className="bg-banner-pattern  py-3 flex items-center justify-between banner relative border-b-2 ">
+			<div className="grid grid-cols-3 z-10 items-center gap-x-2 lg:ml-24 px-5">
 				<div className="row-span-3 col-span-1 flex items-center justify-center">
 					<div className="flex flex-col items-center relative w-3/5">
 						<div className="w-[5rem] max-h-[5rem] rounded-full relative  flex justify-center overflow-hidden">
@@ -34,7 +35,7 @@ export function Banner() {
 					{currentUser?.email}
 				</span>
 			</div>
-			<button className="z-10 md:text-lg font-medium">
+			<button className="z-10 md:text-lg font-medium mr-5">
 				<span>0 </span>
 				<span>Followers</span>
 			</button>
@@ -58,7 +59,7 @@ function ProfileEditModal(props) {
 		const form = new FormData();
 		form.append("image", images[0].file);
 		const responseData = await fetch(
-			"https://api.imgbb.com/1/upload?expiration=600&key=897f403846a7e8120c4b95e37c7b21ac",
+			`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`,
 			{
 				method: "POST",
 				body: form,

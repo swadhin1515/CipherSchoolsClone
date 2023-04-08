@@ -29,6 +29,8 @@ export function ProfessionalInformation() {
 		currentUser.current_work || "College Student"
 	);
 	async function handleSave() {
+		setEducationBrowseModalVisible(false);
+		setWorkBrowseModalVisible(false);
 		try {
 			const formData = {
 				email: currentUser.email,
@@ -91,28 +93,33 @@ export function ProfessionalInformation() {
 									`flex flex-col z-20 pb-2 shadow-lg w-full rounded-lg bg-white absolute top-12 transition duration-200 overflow-hidden ` +
 									`${
 										educationBrowseModalVisible
-											? `opacity-100  `
-											: `opacity-0`
+											? `opacity-100 `
+											: `opacity-0 h-0`
 									}`
 								}>
-								{Educations.map((education: string) => {
-									return (
-										<span
-											onClick={() => {
-												setHighestEducation(education);
-												setEducationBrowseModalVisible(
-													(prev) => !prev
-												);
-											}}
-											className={`${
-												highestEducation ===
-													education &&
-												"bg-orange-400 text-white "
-											} + cursor-pointer hover:bg-orange-100 py-1 px-6 transition duration-200 text-base rounded`}>
-											{education}
-										</span>
-									);
-								})}
+								{Educations.map(
+									(education: string, index: number) => {
+										return (
+											<span
+												onClick={() => {
+													setHighestEducation(
+														education
+													);
+													setEducationBrowseModalVisible(
+														(prev) => !prev
+													);
+												}}
+												key={index}
+												className={`${
+													highestEducation ===
+														education &&
+													"bg-orange-400 text-white "
+												} + cursor-pointer hover:bg-orange-100 py-1 px-6 transition duration-200 text-base rounded`}>
+												{education}
+											</span>
+										);
+									}
+								)}
 							</div>
 						</div>
 					</div>
@@ -144,10 +151,10 @@ export function ProfessionalInformation() {
 									`${
 										workBrowseModalVisible
 											? `opacity-100`
-											: `opacity-0`
+											: `opacity-0 h-0`
 									}`
 								}>
-								{Works.map((work: string) => {
+								{Works.map((work: string, index: number) => {
 									return (
 										<span
 											onClick={() => {
@@ -156,6 +163,7 @@ export function ProfessionalInformation() {
 													(prev) => !prev
 												);
 											}}
+											key={index}
 											className={`${
 												currentWork === work &&
 												"bg-orange-400 text-white"

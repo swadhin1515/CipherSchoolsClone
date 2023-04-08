@@ -95,7 +95,7 @@ export function Navbar() {
 						</div>
 					</div>
 				</li>
-				<li className="flex gap-10 items-center">
+				<li className="flex lg:gap-10 gap-4 items-center">
 					<div className="border-2 rounded-2xl bg-gray-100 xl:flex hidden items-center px-6">
 						<FiSearch className="text-base text-gray-500 cursor-pointer hidden lg:inline-block " />
 						<input
@@ -124,7 +124,7 @@ export function Navbar() {
 					</button>
 					<div>
 						<span
-							className="flex items-center gap-2 text-yellow-500  bg-[#4d4d4d] p-1 rounded-2xl max-w-fit cursor-pointer relative"
+							className="text-sm flex items-center gap-2 text-yellow-500  bg-[#4d4d4d] p-1 rounded-2xl max-w-fit cursor-pointer relative"
 							onClick={() => setIsDarkMode((prev) => !prev)}>
 							<BsFillMoonFill />
 							<BsFillSunFill />

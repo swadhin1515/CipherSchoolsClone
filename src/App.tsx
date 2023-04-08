@@ -116,21 +116,23 @@ function App() {
 		);
 	else {
 		return (
-			<div className="flex flex-col h-screen justify-center items-center bg-slate-800 bg-opacity-10">
-				<main className="text-center p-5 px-20 bg-white rounded-2xl shadow-md xl:w-[50rem]">
-					<header className="text-2xl text-left">Signin</header>
-					<h1 className="flex gap-4 text-xl font-medium items-center mt-4 justify-center">
+			<div className="flex flex-col h-screen lg:justify-center items-center bg-slate-800 bg-opacity-10 pt-40 lg:pt-0 px-20">
+				<main className="text-center py-20 lg:py-10 lg:px-10 md bg-white rounded-2xl shadow-md xl:w-[50rem] px-10">
+					<header className="lg:text-2xl text-left text-7xl">
+						Signin
+					</header>
+					<h1 className="flex gap-4 lg:text-xl text-6xl font-medium items-center lg:mt-4 mt-10 justify-center">
 						<img
 							src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
 							alt=""
-							className="w-10"
+							className="lg:w-10 w-20"
 						/>
 						<span>CipherSchools</span>
 					</h1>
-					<h2 className="text-lg mt-4">
+					<h2 className="lg:text-lg text-4xl mt-4">
 						{signin ? "Hey, Welcome!" : "Create New Account"}
 					</h2>
-					<p className="text-base mb-4">
+					<p className="lg:text-base text-3xl mb-4">
 						{signin
 							? "Please provide your email and password to signin"
 							: "Please provide your valid information to signup"}
@@ -144,7 +146,7 @@ function App() {
 								onChange={(e) =>
 									setFirstName(e.currentTarget.value)
 								}
-								className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+								className="border-2 border-slate-200 p-3 lg:text-base text-4xl text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
 							/>
 							<input
 								type="text"
@@ -153,7 +155,7 @@ function App() {
 								onChange={(e) =>
 									setLastName(e.currentTarget.value)
 								}
-								className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+								className="border-2 border-slate-200 p-3 lg:text-base text-4xl text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
 							/>
 						</>
 					)}
@@ -162,21 +164,21 @@ function App() {
 						placeholder="Email ID"
 						value={email}
 						onChange={(e) => setEmail(e.currentTarget.value)}
-						className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
+						className="border-2 border-slate-200 p-3 lg:text-base text-4xl text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
 					/>
 					<input
 						type="password"
 						placeholder="Password"
 						value={password}
 						onChange={(e) => setPassword(e.currentTarget.value)}
-						className="border-2 border-slate-200 p-3 text-base text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:border-slate-200"
+						className="border-2 border-slate-200 p-3 lg:text-base text-4xl text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:border-slate-200"
 					/>
 					<button
 						onClick={signin ? handleSignin : handleSignup}
-						className="bg-orange-400 text-white py-4 px-20 rounded-2xl w-full text-base hover:bg-orange-300 duration-200 transition mt-14">
+						className="bg-orange-400 text-white lg:py-4 px-20 py-6 rounded-2xl w-full lg:text-base text-4xl hover:bg-orange-300 duration-200 transition mt-14">
 						{signin ? "Signin" : "Create Account"}
 					</button>
-					<p className="text-base mt-4">
+					<p className="lg:text-base text-4xl mt-4">
 						{signin
 							? "Don't have an account ? "
 							: "Already have an account ? "}
@@ -186,14 +188,6 @@ function App() {
 							{signin ? "Get Started" : "Signin Now"}
 						</button>
 					</p>
-					<div className="text-base relative font-bold border-t-2 mt-8">
-						<span className="bg-white relative -top-4 p-4">OR</span>
-					</div>
-					<button
-						// onClick={() => loginWithRedirect()}
-						className="bg-white text-slate-800 py-4 px-20 rounded-2xl w-full text-base hover:bg-slate-100 duration-200 transition border-2 border-slate-200 font-medium">
-						Login with Socials
-					</button>
 				</main>
 			</div>
 		);
