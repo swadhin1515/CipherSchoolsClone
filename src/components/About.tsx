@@ -6,6 +6,7 @@ export function About() {
 	const { performFetch, currentUser } = useContext(Context);
 	const [about, setAbout] = useState(currentUser.about);
 	async function handleSave() {
+		console.log(about);
 		try {
 			const formData = {
 				email: currentUser.email,
@@ -40,7 +41,7 @@ export function About() {
 				<textarea
 					className="focus:ring-0 bg-white rounded-lg w-full h-40 p-6 text-gray-600 text-base outline-none border-none resize-none"
 					placeholder="Add Something about you."
-					value={about}
+					defaultValue={about}
 					onChange={(e) => setAbout(e.currentTarget.value)}
 					disabled={!isEditing}
 				/>

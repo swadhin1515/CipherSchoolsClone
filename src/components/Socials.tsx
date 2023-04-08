@@ -61,7 +61,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 outline-none border-none focus:ring-0 w-full "
 							placeholder="Linkedin"
-							value={linkedin}
+							defaultValue={linkedin}
 							onChange={(e) => setLinkedin(e.currentTarget.value)}
 							disabled={!isEditing}
 						/>
@@ -80,7 +80,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 placeholder:text-gray-400 outline-none border-none focus:ring-0 w-full"
 							placeholder="Github"
-							value={github}
+							defaultValue={github}
 							onChange={(e) => setGithub(e.currentTarget.value)}
 							disabled={!isEditing}
 						/>
@@ -99,7 +99,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 placeholder:text-gray-400 outline-none border-none focus:ring-0 w-full"
 							placeholder="Facebook"
-							value={facebook}
+							defaultValue={facebook}
 							onChange={(e) => setFacebook(e.currentTarget.value)}
 							disabled={!isEditing}
 						/>
@@ -118,7 +118,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 placeholder:text-gray-400 outline-none border-none focus:ring-0 w-full"
 							placeholder="Twitter"
-							value={twitter}
+							defaultValue={twitter}
 							onChange={(e) => setTwitter(e.currentTarget.value)}
 							disabled={!isEditing}
 						/>
@@ -137,7 +137,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 placeholder:text-gray-400 outline-none border-none focus:ring-0 w-full"
 							placeholder="Instagram"
-							value={instagram}
+							defaultValue={instagram}
 							onChange={(e) =>
 								setInstagram(e.currentTarget.value)
 							}
@@ -158,7 +158,7 @@ export function Socials() {
 							type="text"
 							className="text-base  text-gray-700 placeholder:text-gray-400 outline-none border-none focus:ring-0 w-full"
 							placeholder="Website"
-							value={website}
+							defaultValue={website}
 							onChange={(e) => setWebsite(e.currentTarget.value)}
 							disabled={!isEditing}
 						/>

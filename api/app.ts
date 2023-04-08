@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { registerRouter } from "./routes/register";
 import { loginRouter } from "./routes/login";
+import { getFollowerRouter } from "./routes/getFollower";
 import { updateRouter } from "./routes/update";
 import { PrismaClient } from "@prisma/client";
 import { Auth } from "./routes/auth";
@@ -46,6 +47,7 @@ app.set("view engine", "jade");
 app.use("/api/register", registerRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/update", Auth, updateRouter);
+app.use("/api/getFollower", getFollowerRouter);
 app.listen(port, () => {
 	console.log("listening at port ", port);
 });

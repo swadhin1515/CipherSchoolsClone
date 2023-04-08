@@ -8,6 +8,7 @@ import { Context } from "./Context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useCookies } from "react-cookie";
 import { Bottomnav } from "./components/Bottomnav";
+import { Followers } from "./components/Followers";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 function App() {
@@ -21,12 +22,14 @@ function App() {
 	const [token, setToken] = useState(cookies["token"] || null);
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [currentUser, setCurrentUser] = useState(cookies["user"] || null);
+	const [showFollower, setShowFollower] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	useEffect(() => {
 		if (token && token !== undefined) setLoggedIn(true);
 	}, []);
 	async function handleSignup(e) {
 		if (e !== null) e.preventDefault();
-
+		setIsLoading(true);
 		try {
 			const formData = {
 				name: firstName + " " + lastName,
@@ -65,6 +68,8 @@ function App() {
 			}
 		} catch (err) {
 			console.log(err);
+		} finally {
+			setIsLoading(false);
 		}
 	}
 	async function performFetch({ url, formData }) {
@@ -111,11 +116,23 @@ function App() {
 	}
 	if (loggedIn)
 		return (
-			<Context.Provider value={{ currentUser, performFetch }}>
+			<Context.Provider
+				value={{
+					currentUser,
+					performFetch,
+					setShowFollower,
+					showFollower,
+				}}>
 				<Navbar />
 				<Sidebar handleLogout={logout} />
-				<Banner />
-				<Main />
+				{showFollower ? (
+					<Followers />
+				) : (
+					<>
+						<Banner />
+						<Main />
+					</>
+				)}
 				<Bottomnav handleLogout={logout} />
 			</Context.Provider>
 		);
@@ -148,6 +165,7 @@ function App() {
 						<>
 							<input
 								type="text"
+								required
 								placeholder="First Name"
 								value={firstName}
 								onChange={(e) =>
@@ -157,6 +175,7 @@ function App() {
 							/>
 							<input
 								type="text"
+								required
 								placeholder="Last Name"
 								value={lastName}
 								onChange={(e) =>
@@ -170,6 +189,7 @@ function App() {
 						type="email"
 						placeholder="Email ID"
 						value={email}
+						required
 						onChange={(e) => setEmail(e.currentTarget.value)}
 						className="border-2 border-slate-200 p-3 text-base  text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:outline-none focus:border-slate-200"
 					/>
@@ -177,13 +197,22 @@ function App() {
 						type="password"
 						placeholder="Password"
 						value={password}
+						required
 						onChange={(e) => setPassword(e.currentTarget.value)}
 						className="border-2 border-slate-200 p-3 text-base  text-slate-600 bg-slate-100 w-full rounded-xl outline-none focus:ring-0 mt-4 focus:border-slate-200"
 					/>
 					<button
 						type="submit"
-						className="bg-orange-400 text-white py-4 px-20 rounded-2xl w-full text-base  hover:bg-orange-300 duration-200 transition mt-14">
-						{signin ? "Signin" : "Create Account"}
+						className="flex justify-center bg-orange-400 text-white py-3 px-20 rounded-2xl w-full text-lg  hover:bg-orange-300 duration-200 transition mt-14">
+						{!isLoading ? (
+							`${signin ? "Signin" : "Create Account"}`
+						) : (
+							<img
+								src="https://samherbert.net/svg-loaders/svg-loaders/three-dots.svg"
+								alt=""
+								className="w-10"
+							/>
+						)}
 					</button>
 					<p className="text-base  mt-4">
 						{signin

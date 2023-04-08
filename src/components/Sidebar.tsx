@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { HiMenuAlt2 } from "react-icons/hi";
 import { IoLibrary, IoCompass } from "react-icons/io5";
@@ -6,10 +6,12 @@ import { SiDiscord } from "react-icons/si";
 import { RiUserFollowFill, RiLogoutCircleRLine } from "react-icons/ri";
 import { MdDashboard, MdFeedback, MdPerson } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Context } from "../Context";
 
 export function Sidebar(props) {
 	const [showSidebar, setShowSidebar] = useState(false);
 	const [showProfileBar, setShowProfileBar] = useState(false);
+	const { setShowFollower } = useContext(Context);
 	const { logout } = useAuth0();
 	function handleLogout() {
 		props.handleLogout();
@@ -27,6 +29,7 @@ export function Sidebar(props) {
 				}  h-[90vh] border-r-2 fixed z-20 bg-white p-4 transition duration-1000  flex-col justify-between flex`}>
 				<ul>
 					<li
+						onClick={() => setShowFollower(false)}
 						className={`${
 							showSidebar ? "gap-6 pr-10" : "flex-col px-4"
 						} + p-2  w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-200 cursor-pointer`}>
@@ -54,6 +57,7 @@ export function Sidebar(props) {
 						</span>
 					</li>
 					<li
+						onClick={() => setShowFollower(true)}
 						className={`${
 							showSidebar ? "gap-6 pr-10" : "flex-col px-4"
 						} + p-2 w-full items-center flex text-base hover:bg-orange-100 rounded-md transition duration-200 cursor-pointer`}>
