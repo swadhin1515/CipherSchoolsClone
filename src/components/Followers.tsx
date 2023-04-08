@@ -19,14 +19,24 @@ export function Followers() {
 		if (showFollower) getFollowers();
 	}, [showFollower]);
 	async function getFollowers() {
-		const formdata = {
+		var myHeaders = new Headers();
+		// if (url === "update")
+		// myHeaders.append("Authorization", `Bearer ${token}`);
+		myHeaders.append("Content-Type", "application/json");
+		const formData = {
 			id: currentUser.id,
 			email: currentUser.email,
 		};
-		const response = await fetch(`${BASE_URL}/api/getFollower`, {
+
+		var requestOptions: RequestInit = {
 			method: "POST",
-			body: JSON.stringify(formdata),
-		}).then(async (response) => {
+			headers: myHeaders,
+			body: JSON.stringify(formData),
+		};
+		const response = await fetch(
+			`${BASE_URL}/api/getFollower`,
+			requestOptions
+		).then(async (response) => {
 			if (response.status === 200) {
 				const responseData = await response.json();
 				return responseData;
@@ -55,7 +65,7 @@ export function Followers() {
 								<h2>******** {follower.name.split(" ")[1]}</h2>
 								<span>{follower.current_work}</span>
 								<span className="text-sm mb-2">
-									{follower.followedByIDs.length} followers
+									{follower._count.followedBy} followers
 								</span>
 								{currentUser.followingIDs.includes(
 									follower.id

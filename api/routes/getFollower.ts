@@ -6,23 +6,24 @@ getFollowerRouter.get("/", function (req, res) {
 	res.send("Hello from getFollowerRouter");
 });
 getFollowerRouter.post("/", async function (req, res, next) {
-	const userFollowers = await prisma.user
-		.findMany({
-			where: {
-				id: req.body.id,
-				email: req.body.email,
+	console.log(req.body.id);
+	const userFollowers = await prisma.user.findUnique({
+		where: { id: req.body.id },
+		include: {
+			followedBy: {
+				select: {
+					id: true,
+					name: true,
+					picture: true,
+					current_work: true,
+					_count: {
+						select: {
+							followedBy: true,
+						},
+					},
+				},
 			},
-			select: {
-				followedBy: true,
-			},
-		})
-		.then((response) => {
-			return response;
-		});
-	const followers = userFollowers.filter((user) => {
-		return user.followedBy.length > 0;
+		},
 	});
-	var arr: any = followers[0].followedBy;
-	console.log(arr);
-	res.status(200).send(arr);
+	res.status(200).send(userFollowers?.followedBy);
 });
