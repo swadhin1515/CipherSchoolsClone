@@ -1,9 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,
-body {
-	@apply lg:text-base text-4xl;
+html {
+	@apply text-base;
 }
 
 /* banner gradient */

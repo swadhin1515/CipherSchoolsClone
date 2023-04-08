@@ -7,7 +7,7 @@ import { ProfessionalInformation } from "./ProfessionalInformation";
 import { Interests } from "./Interests";
 export function Main() {
 	return (
-		<main className="bg-slate-100">
+		<main className="bg-slate-100 pb-28">
 			<About />
 			<CipherMap />
 			<Socials />

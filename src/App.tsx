@@ -7,6 +7,7 @@ import { Main } from "./components/Main";
 import { Context } from "./Context";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useCookies } from "react-cookie";
+import { Bottomnav } from "./components/Bottomnav";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 function App() {
@@ -112,6 +113,7 @@ function App() {
 				<Sidebar handleLogout={logout} />
 				<Banner />
 				<Main />
+				<Bottomnav />
 			</Context.Provider>
 		);
 	else {

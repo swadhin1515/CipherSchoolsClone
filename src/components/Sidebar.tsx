@@ -4,11 +4,12 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import { IoLibrary, IoCompass } from "react-icons/io5";
 import { SiDiscord } from "react-icons/si";
 import { RiUserFollowFill, RiLogoutCircleRLine } from "react-icons/ri";
-import { MdDashboard, MdFeedback } from "react-icons/md";
+import { MdDashboard, MdFeedback, MdPerson } from "react-icons/md";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function Sidebar(props) {
 	const [showSidebar, setShowSidebar] = useState(false);
+	const [showProfileBar, setShowProfileBar] = useState(false);
 	const { logout } = useAuth0();
 	function handleLogout() {
 		props.handleLogout();

@@ -95,7 +95,7 @@ export function Navbar() {
 						</div>
 					</div>
 				</li>
-				<li className="flex lg:gap-10 gap-4 items-center">
+				<li className="flex lg:gap-10 gap-4 items-center text-">
 					<div className="border-2 rounded-2xl bg-gray-100 xl:flex hidden items-center px-6">
 						<FiSearch className="text-base text-gray-500 cursor-pointer hidden lg:inline-block " />
 						<input
