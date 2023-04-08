@@ -49,6 +49,7 @@ function App() {
 	}
 	async function handleSignin(e) {
 		if (e !== null) e.preventDefault();
+		setIsLoading(true);
 		const formData = {
 			email: email,
 			password: password,
