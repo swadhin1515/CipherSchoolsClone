@@ -144,8 +144,10 @@ function App() {
 					onSubmit={(e) =>
 						signin ? handleSignin(e) : handleSignup(e)
 					}
-					className="text-center py-20 lg:py-10 bg-white rounded-2xl shadow-md xl:w-[50rem] px-10">
-					<header className="text-2xl text-left ">Signin</header>
+					className="text-center py-5 sm:py-10 bg-white rounded-2xl shadow-md xl:w-[50rem] px-5 lg:px-10">
+					<header className="text-2xl text-left ">
+						{signin ? "Signin" : "Signup"}
+					</header>
 					<h1 className="flex gap-4 text-xl font-medium items-center mt-4 justify-center">
 						<img
 							src="https://www.cipherschools.com/static/media/Cipherschools_icon@2x.3b571d743ffedc84d039.png"
@@ -157,7 +159,7 @@ function App() {
 					<h2 className="text-lg mt-4">
 						{signin ? "Hey, Welcome!" : "Create New Account"}
 					</h2>
-					<p className="text-base  mb-4">
+					<p className="text-sm sm:text-base  mb-4">
 						{signin
 							? "Please provide your email and password to signin"
 							: "Please provide your valid information to signup"}
@@ -204,7 +206,7 @@ function App() {
 					/>
 					<button
 						type="submit"
-						className="flex justify-center bg-orange-400 text-white py-3 px-20 rounded-2xl w-full text-lg  hover:bg-orange-300 duration-200 transition mt-14">
+						className="flex justify-center bg-orange-400 text-white py-3 rounded-2xl w-full text-lg  hover:bg-orange-300 duration-200 transition mt-8 sm:mt-14">
 						{!isLoading ? (
 							`${signin ? "Signin" : "Create Account"}`
 						) : (
@@ -215,11 +217,12 @@ function App() {
 							/>
 						)}
 					</button>
-					<p className="text-base  mt-4">
+					<p className="text-sm sm:text-base  mt-4">
 						{signin
 							? "Don't have an account ? "
 							: "Already have an account ? "}
 						<button
+							type="button"
 							className="text-orange-400"
 							onClick={() => setSignin((prev) => !prev)}>
 							{signin ? "Get Started" : "Signin Now"}
