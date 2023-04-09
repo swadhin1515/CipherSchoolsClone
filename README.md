@@ -2,5 +2,5 @@
 
 Test credentials:
 
-Email - test@gmail.com
+Email - test@gmail.com <br>
 Password - test123
